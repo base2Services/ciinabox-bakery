@@ -1,0 +1,5 @@
+base_params.json
+build/
+*.yml
+*.tar.gz
+cookbooks/

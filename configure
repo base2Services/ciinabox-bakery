@@ -1,0 +1,39 @@
+#!/usr/bin/env bash
+#
+# AMI Baking Configuration
+#
+# lookup the ciinabox vpc details
+#
+# base2Services <itsupport@base2services.com>
+#
+set -e
+
+[ -r /etc/environment ] && . /etc/environment
+
+# Logging
+function log() {
+  LEVEL="${1^^}"
+  MESSAGE="$2"
+  DATESTAMP="`date +%r`"
+
+  echo "${DATESTAMP} [${LEVEL}] -- ${MESSAGE}"
+}
+
+SCRIPT_PATH="`dirname \"$0\"`"
+SCRIPT_PATH="`( cd \"$SCRIPT_PATH\" && pwd )`"
+
+CIINABOX_NAME=${1}
+REGION=${2}
+AMI_USERS=${3}
+
+eval $(aws cloudformation describe-stacks --stack-name ciinabox-$CIINABOX_NAME --query 'Stacks[*].Outputs[*].{Key:OutputKey, Value:OutputValue}' --region ${REGION} --output text | tr -s '\t' | tr '\t' '=')
+cat <<EOT > ${SCRIPT_PATH}/base_params.json
+{
+  "region": "${Region}",
+  "vpc_id": "${VPCId}",
+  "subnet_id": "${ECSPrivateSubnetA}",
+  "security_group": "${SecurityGroup}",
+  "packer_role": "${ECSRole}"
+  "ami_users": "${AMI_USERS}"
+}
+EOT

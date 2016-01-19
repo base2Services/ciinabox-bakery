@@ -1,0 +1,84 @@
+#!/usr/bin/env bash
+#
+# AMI Baking script
+#
+# base2Services <itsupport@base2services.com>
+#
+set -e
+
+[ -r /etc/environment ] && . /etc/environment
+
+# Logging
+function log() {
+  LEVEL="${1^^}"
+  MESSAGE="$2"
+  DATESTAMP="`date +%r`"
+
+  echo "${DATESTAMP} [${LEVEL}] -- ${MESSAGE}"
+}
+
+SCRIPT_PATH="`dirname \"$0\"`"
+SCRIPT_PATH="`( cd \"$SCRIPT_PATH\" && pwd )`"
+
+CLIENT=${1}
+AMI_TYPE=${2}
+PACKER_BUILD_TMPL=${3}
+PACKER_BUILD_PARAMS=${4}
+BUILD_NUMBER=${5}
+SOURCE_AMI=${6}
+
+mkdir -p build
+
+if [[ x${AWS_ACCESS_KEY_ID} == "x" ]]; then
+  CLI_OPTS=""
+else
+  CLI_OPTS="-var access_key=${AWS_ACCESS_KEY_ID} -var secret_key=${AWS_SECRET_ACCESS_KEY}"
+fi
+
+CLI_OPTS="${CLI_OPTS} -var ami_name=${AMI_TYPE}"
+CLI_OPTS="${CLI_OPTS} -var build_no=${BUILD_NUMBER}"
+
+if [[ ! x${SOURCE_AMI} == "x" ]]; then
+  CLI_OPTS="${CLI_OPTS} -var source_ami=${SOURCE_AMI}"
+  log info "using custom base ami ${SOURCE_AMI}"
+fi
+
+if [[ ! x${7} == "x" ]]; then
+  CLI_OPTS="${CLI_OPTS} -var build_id=${7}"
+  log info "using build_id ${7}"
+fi
+
+if [[ ! x${8} == "x" ]]; then
+  CLI_OPTS="${CLI_OPTS} -var build_sha=${8}"
+  log info "using build_sha ${8}"
+fi
+
+if [[ ! x${9} == "x" ]]; then
+  CLI_OPTS="${CLI_OPTS} -var chef_run_list=${9}"
+  log info "using chef_run_list ${9}"
+fi
+
+if [[ ! x${10} == "x" ]]; then
+  CLI_OPTS="${CLI_OPTS} -var instance_type=${10}"
+  log info "using instance_type ${10}"
+fi
+
+echo "{\"${CLIENT}\":{\"version\":\"${BUILD_NUMBER}\",\"build_id\":\"${7}\",\"build_sha\":\"${8}\"}}" > build/override.json
+
+/opt/packer/packer build -machine-readable -var-file=${PACKER_BUILD_PARAMS} ${CLI_OPTS} ${PACKER_BUILD_TMPL} | tee build/build.log
+
+#extract base AMI-ID
+AMI_ID=`cat build/build.log | tr -d '\000' | grep 'artifact,0,id' | cut -d, -f6 | cut -d: -f2`
+if [[ x${AMI_ID} == 'x' ]]; then
+  log error "failed to create ${AMI_TYPE} AMI"
+  exit 1
+fi
+
+log info "Creating AMI Yaml Mapping file....."
+cat <<EOT > ${AMI_TYPE}-ami-${BUILD_NUMBER}.yml
+${AMI_TYPE}AMI:
+  ap-southeast-2:
+    ami: ${AMI_ID}
+EOT
+
+exit 0
