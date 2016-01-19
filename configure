@@ -33,7 +33,7 @@ cat <<EOT > ${SCRIPT_PATH}/base_params.json
   "vpc_id": "${VPCId}",
   "subnet_id": "${ECSPrivateSubnetA}",
   "security_group": "${SecurityGroup}",
-  "packer_role": "${ECSRole}"
+  "packer_role": "${ECSRole}",
   "ami_users": "${AMI_USERS}"
 }
 EOT
