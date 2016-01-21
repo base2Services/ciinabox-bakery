@@ -77,7 +77,7 @@ fi
 log info "Creating AMI Yaml Mapping file....."
 cat <<EOT > ${AMI_TYPE}-ami-${BUILD_NUMBER}.yml
 ${AMI_TYPE}AMI:
-  ap-southeast-1:
+  us-west-2:
     ami: ${AMI_ID}
 EOT
 
