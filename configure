@@ -27,6 +27,11 @@ REGION=${2}
 AMI_USERS=${3}
 
 eval $(aws cloudformation describe-stacks --stack-name ciinabox --query 'Stacks[*].Outputs[*].{Key:OutputKey, Value:OutputValue}' --region ${REGION} --output text | tr -s '\t' | tr '\t' '=')
+
+if [[ "x${ECSInstanceProfile}" == "x" ]]; then
+  ECSInstanceProfile="packer"
+fi
+
 cat <<EOT > ${SCRIPT_PATH}/base_params.json
 {
   "region": "${Region}",
@@ -34,6 +39,7 @@ cat <<EOT > ${SCRIPT_PATH}/base_params.json
   "subnet_id": "${ECSPrivateSubnetA}",
   "security_group": "${SecurityGroup}",
   "packer_role": "${ECSRole}",
+  "packer_instance_profile": "${ECSInstanceProfile}",
   "ami_users": "${AMI_USERS}"
 }
 EOT
