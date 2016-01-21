@@ -4,7 +4,7 @@
     "region": "{{ user `region` }}",
     "source_ami": "{{ user `source_ami` }}",
     "instance_type": "{{ user `instance_type` }}",
-    "iam_instance_profile":"packer",
+    "iam_instance_profile":"{{ user `packer_role`}}",
     "ami_name": "{{ user `client`}}-{{ user `ami_name` }}-{{ user `build_no` }}",
     "ami_regions": "{{ user `ami_regions`}}",
     "ami_users": "{{ user `ami_users`}}",
@@ -91,6 +91,7 @@
     "chef_run_list":"",
     "ami_regions":"",
     "ami_users":"",
+    "packer_role":"packer",
     "instance_type":"m3.medium"
   }
 }
