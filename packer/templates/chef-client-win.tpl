@@ -1,9 +1,9 @@
 log_level        :debug
 log_location     STDOUT
 local_mode       true
-cookbook_path    C:/chef/cookbooks
-data_bag_path    C:/chef/data_bags
-environment_path C:/chef/environments
+cookbook_path    "C:/chef/cookbooks"
+data_bag_path    "C:/chef/data_bags"
+environment_path "C:/chef/environments"
 chef_server_url  "{{.ServerUrl}}"
 client_key       "{{.ClientKey}}"
 {{if ne .EncryptedDataBagSecretPath ""}}
