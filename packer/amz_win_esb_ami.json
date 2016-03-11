@@ -63,6 +63,12 @@
       "destination": "c:\\chef"
     },
     {
+      "type": "windows-shell",
+      "inline": [
+        "dir /s c:\\chef"
+      ]
+    },
+    {
       "type": "chef-client",
       "guest_os_type": "windows",
       "config_template": "packer/templates/chef-client-win.tpl",
