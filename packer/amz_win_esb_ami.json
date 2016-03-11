@@ -37,30 +37,33 @@
   }],
   "provisioners": [
     {
-      "type": "windows-shell",
+      "type": "powershell",
       "inline": [
-        "mkdir c:\\chef"
+        "New-Item c:/chef/cookbooks -type directory -force",
+        "New-Item c:/chef/data_bags -type directory -force",
+        "New-Item c:/chef/environments -type directory -force",
+        "New-Item c:/chef/encrypted_data_bag_secret -type directory -force"
       ]
     },
     {
       "type": "file",
       "source": "{{pwd}}/cookbooks",
-      "destination": "c:\\chef"
+      "destination": "c:\\chef\\cookbooks"
     },
     {
       "type": "file",
       "source": "{{pwd}}/data_bags",
-      "destination": "c:\\chef"
+      "destination": "c:\\chef\\data_bags"
     },
     {
       "type": "file",
       "source": "{{pwd}}/environments",
-      "destination": "c:\\chef"
+      "destination": "c:\\chef\\environments"
     },
     {
       "type": "file",
       "source": "{{pwd}}/encrypted_data_bag_secret",
-      "destination": "c:\\chef"
+      "destination": "c:\\chef\\encrypted_data_bag_secret"
     },
     {
       "type": "windows-shell",
