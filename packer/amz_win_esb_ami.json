@@ -65,7 +65,7 @@
     {
       "type": "chef-client",
       "guest_os_type": "windows",
-      "execute_command": "cd c:/chef; c:/opscode/chef/bin/chef-client.bat --local-mode --no-color -c {{.ConfigPath}} -j {{.JsonPath}}",
+      "config_template": "packer/chef-client-win.tpl",
       "skip_install": false,
       "skip_clean_node": true,
       "skip_clean_client": true,
