@@ -38,6 +38,11 @@ fi
 CLI_OPTS="${CLI_OPTS} -var ami_name=${AMI_TYPE}"
 CLI_OPTS="${CLI_OPTS} -var build_no=${BUILD_NUMBER}"
 
+if [[ ! x${CLIENT} == "x" ]]; then
+  CLI_OPTS="${CLI_OPTS} -var client=${CLIENT}"
+  log info "using client name ${CLIENT}"
+fi
+
 if [[ ! x${SOURCE_AMI} == "x" ]]; then
   CLI_OPTS="${CLI_OPTS} -var source_ami=${SOURCE_AMI}"
   log info "using custom base ami ${SOURCE_AMI}"
