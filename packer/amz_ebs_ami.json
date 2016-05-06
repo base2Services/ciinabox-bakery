@@ -27,9 +27,9 @@
   "provisioners": [
     {
       "type": "shell",
-      "inline": ["sudo mkdir /etc/chef",
+      "inline": ["sudo mkdir -p /etc/chef",
         "sudo chmod -R 777 /etc/chef",
-        "mkdir /tmp/packer-chef-client/",
+        "mkdir -p /tmp/packer-chef-client/",
         "chmod 0755 /tmp/packer-chef-client"
       ]
     },
