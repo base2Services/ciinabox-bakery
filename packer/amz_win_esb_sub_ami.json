@@ -53,12 +53,6 @@
           "app_build_sha": "{{user `build_sha`}}"
         }
       }
-    },
-    {
-      "type": "windows-shell",
-      "inline": [
-        "\"%ProgramFiles%\"\\Amazon\\Ec2ConfigService\\ec2config.exe -sysprep"
-      ]
     }
   ],
   "variables": {
