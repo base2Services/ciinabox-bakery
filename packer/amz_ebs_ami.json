@@ -59,7 +59,7 @@
     },
     {
       "type": "chef-client",
-      "execute_command": "cd /etc/chef && sudo chef-client --local-mode --no-color -c /tmp/packer-chef-client/client.rb -j /tmp/packer-chef-client/first-boot.json",
+      "execute_command": "cd /etc/chef && sudo chef-client --local-mode --no-color -c /tmp/packer-chef-client/client.rb -j /tmp/packer-chef-client/first-boot.json --log_level error",
       "prevent_sudo": false,
       "skip_install": false,
       "skip_clean_node": true,
