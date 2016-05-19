@@ -1,4 +1,4 @@
-log_level        :info
+log_level        :error
 log_location     STDOUT
 local_mode       true
 cookbook_path    "C:/chef/cookbooks"
