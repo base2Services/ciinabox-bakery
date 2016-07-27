@@ -31,7 +31,7 @@
         "sudo chmod -R 777 /etc/chef",
         "mkdir -p /tmp/packer-chef-client/",
         "chmod 0755 /tmp/packer-chef-client",
-        "apt-get update"
+        "sudo apt-get update"
       ]
     },
     {
