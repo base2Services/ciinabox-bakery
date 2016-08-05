@@ -68,6 +68,11 @@ if [[ ! x${10} == "x" ]]; then
   log info "using instance_type ${10}"
 fi
 
+if [[ ! x${11} == "x" ]]; then
+  CLI_OPTS="${CLI_OPTS} -var bake_volume_size=${11}"
+  log info "using bake_volume_size ${11}"
+fi
+
 echo "{\"${CLIENT}\":{\"version\":\"${BUILD_NUMBER}\",\"build_id\":\"${7}\",\"build_sha\":\"${8}\"}}" > build/override.json
 
 /opt/packer/packer build -machine-readable -var-file=${PACKER_BUILD_PARAMS} ${CLI_OPTS} ${PACKER_BUILD_TMPL} | tee build/build.log
