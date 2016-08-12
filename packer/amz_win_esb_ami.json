@@ -21,6 +21,7 @@
     "winrm_username": "Administrator",
     "ami_block_device_mappings": [{
       "device_name": "/dev/sda1",
+      "volume_size": "{{ user `bake_volume_size` }}",
       "volume_type": "gp2",
       "delete_on_termination": true
     }],
@@ -113,6 +114,7 @@
     "ami_users":"",
     "packer_role":"packer",
     "packer_instance_profile":"packer",
-    "instance_type":"m3.medium"
+    "instance_type":"m3.medium",
+    "bake_volume_size":"30"
   }
 }
