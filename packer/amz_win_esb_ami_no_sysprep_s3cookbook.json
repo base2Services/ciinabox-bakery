@@ -50,11 +50,11 @@
     {
       "type": "powershell",
       "scripts": [
-        "setupwindows.ps1",
-        "edit_ec2_config.ps1",
-        "install_chefdk.ps1",
-        "download_cookbooks.ps1",
-        "run_chef.ps1"
+        "scripts/setupwindows.ps1",
+        "scripts/edit_ec2_config.ps1",
+        "scripts/install_chefdk.ps1",
+        "scripts/download_cookbooks.ps1",
+        "scripts/run_chef.ps1"
       ],
       "environment_vars": [
         "CHEF_RUN_LIST={{user `chef_run_list`}}",
