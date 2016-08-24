@@ -51,7 +51,6 @@
       "type": "powershell",
       "scripts": [
         "scripts/setupwindows.ps1",
-        "scripts/edit_ec2_config.ps1",
         "scripts/install_chefdk.ps1",
         "scripts/download_cookbooks.ps1",
         "scripts/run_chef.ps1"
