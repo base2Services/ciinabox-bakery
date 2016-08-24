@@ -73,6 +73,11 @@ if [[ ! x${11} == "x" ]]; then
   log info "using bake_volume_size ${11}"
 fi
 
+if [[ ! x${S3_BUCKET} == "x" ]]; then
+  CLI_OPTS="${CLI_OPTS} -var s3_bucket=${S3_BUCKET}"
+  log info "using s3 bucket ${S3_BUCKET}"
+fi
+
 echo "{\"${CLIENT}\":{\"version\":\"${BUILD_NUMBER}\",\"build_id\":\"${7}\",\"build_sha\":\"${8}\"}}" > build/override.json
 
 /opt/packer/packer build -machine-readable -var-file=${PACKER_BUILD_PARAMS} ${CLI_OPTS} ${PACKER_BUILD_TMPL} | tee build/build.log
