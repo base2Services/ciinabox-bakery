@@ -1,4 +1,5 @@
 $ErrorActionPreference = "Stop"
+$VerbosePreference = "Continue"
 
 Write-Output "Start at: $(Get-Date)"
 
