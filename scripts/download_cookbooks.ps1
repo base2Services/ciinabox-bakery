@@ -10,7 +10,7 @@ try
   $Destination = "C:\chef\"
   $CookbookDir = "C:\chef\cookbooks"
   Write-Output "going to download"
-  Read-S3Object -Region ap-southeast-2 -BucketName $ENV:S3_BUCKET -Key /chef/latest/cookbooks.zip -File C:\base2\chef.zip
+  Read-S3Object -Region $ENV:region -BucketName $ENV:S3_BUCKET -Key /chef/latest/cookbooks.zip -File C:\base2\chef.zip
   Write-Output "delete dir"
   if(Test-Path -Path $CookbookDir ){
     Remove-Item -Recurse -Force $CookbookDir
