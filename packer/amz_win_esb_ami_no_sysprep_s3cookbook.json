@@ -17,7 +17,7 @@
     "run_tags": {
       "Name": "Packer {{ user `ami_name` }} (Windows)"
     },
-    "user_data_file": "scripts/win/setup_winrm.userdata",
+    "user_data_file": "scripts/win/setup_winrm_nostopwinrm.userdata",
     "winrm_username": "Administrator",
     "ami_block_device_mappings": [{
       "device_name": "/dev/sda1",
