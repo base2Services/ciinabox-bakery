@@ -80,7 +80,7 @@ fi
 
 echo "{\"${CLIENT}\":{\"version\":\"${BUILD_NUMBER}\",\"build_id\":\"${7}\",\"build_sha\":\"${8}\"}}" > build/override.json
 
-/opt/packer/packer build -machine-readable -var-file=${PACKER_BUILD_PARAMS} ${CLI_OPTS} ${PACKER_BUILD_TMPL} | tee build/build.log
+/opt/packer/packer build -debug -machine-readable -var-file=${PACKER_BUILD_PARAMS} ${CLI_OPTS} ${PACKER_BUILD_TMPL} | tee build/build.log
 
 #extract base AMI-ID
 AMI_ID=`cat build/build.log | tr -d '\000' | grep 'artifact,0,id' | cut -d, -f6 | cut -d: -f2`
