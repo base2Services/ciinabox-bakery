@@ -35,6 +35,12 @@ else
   CLI_OPTS="-var access_key=${AWS_ACCESS_KEY_ID} -var secret_key=${AWS_SECRET_ACCESS_KEY}"
 fi
 
+if [[ ! x${CHEF_VERSION} == "x" ]]; then
+  CLI_OPTS="${CLI_OPTS} -var chef_version=${CHEF_VERSION}"
+  log info "using chef_version ${CHEF_VERSION}"
+fi
+
+
 CLI_OPTS="${CLI_OPTS} -var ami_name=${AMI_TYPE}"
 CLI_OPTS="${CLI_OPTS} -var build_no=${BUILD_NUMBER}"
 
