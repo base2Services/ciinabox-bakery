@@ -30,8 +30,7 @@
       "inline": ["sudo mkdir -p /etc/chef",
         "sudo chmod -R 777 /etc/chef",
         "mkdir -p /tmp/packer-chef-client/",
-        "chmod 0755 /tmp/packer-chef-client",
-	"sudo apt-get update"
+        "chmod 0755 /tmp/packer-chef-client"
       ]
     },
     {
