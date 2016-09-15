@@ -73,6 +73,11 @@ if [[ ! x${11} == "x" ]]; then
   log info "using bake_volume_size ${11}"
 fi
 
+if [[ ! x${12} == "x" ]]; then
+  CLI_OPTS="${CLI_OPTS} -var chef_version=${11}"
+  log info "using chef_version ${11}"
+fi
+
 echo "{\"${CLIENT}\":{\"version\":\"${BUILD_NUMBER}\",\"build_id\":\"${7}\",\"build_sha\":\"${8}\"}}" > build/override.json
 
 /opt/packer/packer build -machine-readable -var-file=${PACKER_BUILD_PARAMS} ${CLI_OPTS} ${PACKER_BUILD_TMPL} | tee build/build.log
