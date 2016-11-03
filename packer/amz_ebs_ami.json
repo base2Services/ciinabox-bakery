@@ -14,6 +14,7 @@
     "subnet_id": "{{ user `subnet_id` }}",
     "ssh_username": "ec2-user",
     "volume_size": "{{ user `bake_volume_size` }}",
+    "device_name": "/dev/sdh",
     "ssh_pty": true,
     "security_group_id": "{{ user `security_group` }}",
     "run_tags": {
