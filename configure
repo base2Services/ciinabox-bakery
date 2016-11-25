@@ -26,7 +26,7 @@ CIINABOX_NAME=${1}
 REGION=${2}
 AMI_USERS=${3}
 
-eval $(aws cloudformation describe-stacks --stack-name ciinabox --query 'Stacks[*].Outputs[*].{Key:OutputKey, Value:OutputValue}' --region ${REGION} --output text | tr -s '\t' | tr '\t' '=')
+eval $(aws cloudformation describe-stacks --stack-name ${CIINABOX_NAME} --query 'Stacks[*].Outputs[*].{Key:OutputKey, Value:OutputValue}' --region ${REGION} --output text | tr -s '\t' | tr '\t' '=')
 
 if [[ "x${ECSInstanceProfile}" == "x" ]]; then
   ECSInstanceProfile="packer"
