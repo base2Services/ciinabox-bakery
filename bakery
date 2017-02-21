@@ -40,6 +40,20 @@ if [[ ! x${CHEF_VERSION} == "x" ]]; then
   log info "using chef_version ${CHEF_VERSION}"
 fi
 
+if [[ ! x${CB_BUILD_NO} == "x" ]]; then
+  CLI_OPTS="${CLI_OPTS} -var cb_buld_no=${CB_BUILD_NO}"
+  log info "using cb_buld_no ${CB_BUILD_NO}"
+fi
+
+if [[ ! x${SOURCE_BUCKET} == "x" ]]; then
+  CLI_OPTS="${CLI_OPTS} -var source_bucket=${SOURCE_BUCKET}"
+  log info "using source_bucket ${SOURCE_BUCKET}"
+fi
+
+if [[ ! x${BUCKET_REGION} == "x" ]]; then
+  CLI_OPTS="${CLI_OPTS} -var bucket_region=${BUCKET_REGION}"
+  log info "using bucket_region ${BUCKET_REGION}"
+fi
 
 CLI_OPTS="${CLI_OPTS} -var ami_name=${AMI_TYPE}"
 CLI_OPTS="${CLI_OPTS} -var build_no=${BUILD_NUMBER}"
