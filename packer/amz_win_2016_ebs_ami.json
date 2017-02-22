@@ -56,7 +56,8 @@
       "environment_vars": [
         "SOURCE_BUCKET={{user `source_bucket`}}",
         "CB_BUILD_NO={{user `cb_buld_no`}}",
-        "BUCKET_REGION={{user `bucket_region`}}"
+        "BUCKET_REGION={{user `bucket_region`}}",
+        "CHEF_PATH={{user `chef_path`}}"
       ]
     },
     {
@@ -98,6 +99,7 @@
     "build_sha": "",
     "chef_run_list":"",
     "source_bucket":"",
+    "chef_path":"chef",
     "bucket_region":"ap-southeast-2",
     "cb_buld_no":"",
     "ami_regions":"",
