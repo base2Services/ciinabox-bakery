@@ -55,6 +55,11 @@ if [[ ! x${BUCKET_REGION} == "x" ]]; then
   log info "using bucket_region ${BUCKET_REGION}"
 fi
 
+if [[ ! x${CHEF_PATH} == "x" ]]; then
+  CLI_OPTS="${CLI_OPTS} -var chef_path=${CHEF_PATH}"
+  log info "using chef_path ${CHEF_PATH}"
+fi
+
 CLI_OPTS="${CLI_OPTS} -var ami_name=${AMI_TYPE}"
 CLI_OPTS="${CLI_OPTS} -var build_no=${BUILD_NUMBER}"
 

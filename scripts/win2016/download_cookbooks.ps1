@@ -12,6 +12,7 @@ try
   $SourceBucket    = $ENV:SOURCE_BUCKET
   $BucketRegion    = $ENV:BUCKET_REGION
   $CookbookVersion = $ENV:CB_BUILD_NO
+  $ChefPath        = $ENV:CHEF_PATH
 
   Write-Output "INFO: Downloading cookbooks from s3 location: $SourceBucket/chef/$CookbookVersion/cookbooks.tar.gz"
   Read-S3Object -Region $BucketRegion -BucketName $SourceBucket -Key /chef/$CookbookVersion/cookbooks.tar.gz -File $GzipPath
