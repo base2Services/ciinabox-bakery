@@ -99,7 +99,8 @@ if [[ ! x${11} == "x" ]]; then
 fi
 
 if [[ ${DEBUG} == "true" ]]; then
-  DEBUG_FLAG="-debug"
+  CLI_OPTS="-debug ${CLI_OPTS}"
+  log info "debug is on"
 fi
 
 echo "{\"${CLIENT}\":{\"version\":\"${BUILD_NUMBER}\",\"build_id\":\"${7}\",\"build_sha\":\"${8}\"}}" > build/override.json
