@@ -112,6 +112,6 @@
     "packer_instance_profile":"packer",
     "instance_type":"m3.medium",
     "bake_volume_size":"8",
-    "docker_volume_size":"8",
+    "docker_volume_size":"8"
   }
 }
