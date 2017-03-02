@@ -15,15 +15,29 @@
     "ssh_username": "ec2-user",
     "ssh_pty": true,
     "security_group_id": "{{ user `security_group` }}",
-    "launch_block_device_mappings": [
+    "ami_block_device_mappings": [
       {
-        "device_name": "/dev/sda1",
+        "device_name": "/dev/xvda",
         "volume_size": "{{ user `bake_volume_size` }}",
         "volume_type": "gp2",
         "delete_on_termination": true
       },
       {
-        "device_name": "/dev/sdf",
+        "device_name": "/dev/xvdf",
+        "volume_size": "{{ user `docker_volume_size` }}",
+        "volume_type": "gp2",
+        "delete_on_termination": true
+      }
+    ],
+    "launch_block_device_mappings": [
+      {
+        "device_name": "/dev/xvda",
+        "volume_size": "{{ user `bake_volume_size` }}",
+        "volume_type": "gp2",
+        "delete_on_termination": true
+      },
+      {
+        "device_name": "/dev/xvdf",
         "volume_size": "{{ user `docker_volume_size` }}",
         "volume_type": "gp2",
         "delete_on_termination": true
