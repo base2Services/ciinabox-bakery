@@ -21,15 +21,15 @@ try
     Write-Output "INFO: Bundle not found, downloading cookbooks from s3 location: $SourceBucket/$ChefPath/$CookbookVersion/cookbooks.tar.gz"
     Read-S3Object -Region $BucketRegion -BucketName $SourceBucket -Key /$ChefPath/$CookbookVersion/cookbooks.tar.gz -File $GzipPath
   }
-  
+
   Write-Output "INFO: Deleting dir $CookbookDir"
   if(Test-Path -Path $CookbookDir ){
     Remove-Item -Recurse -Force $CookbookDir
   }
 
   Write-Output "INFO: Extracting $GzipPath to $CookbookDir"
-  7za x $GzipPath -o"$Base2Path"
-  7za x $TarPath -o"$Destination"
+  7za x $GzipPath -y -o"$Base2Path"
+  7za x $TarPath -y -o"$Destination"
 
   Write-Output "INFO: Cleaning up $GzipPath $TarPath"
   rm $GzipPath
