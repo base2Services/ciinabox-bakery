@@ -48,34 +48,22 @@
       ]
     },
     {
-      "type": "file",
-      "source": "{{pwd}}/cookbooks",
-      "destination": "c:\\chef\\cookbooks"
-    },
-    {
-      "type": "file",
-      "source": "{{pwd}}/data_bags",
-      "destination": "c:\\chef\\data_bags"
-    },
-    {
-      "type": "file",
-      "source": "{{pwd}}/environments",
-      "destination": "c:\\chef\\environments"
-    },
-    {
-      "type": "file",
-      "source": "{{pwd}}/encrypted_data_bag_secret",
-      "destination": "c:\\chef\\encrypted_data_bag_secret"
-    },
-    {
-      "type": "windows-shell",
-      "inline": [
-        "dir /s c:\\chef"
+      "type": "powershell",
+      "scripts": [
+        "scripts/win2012/install_7zip.ps1",
+        "scripts/win2012/download_cookbooks.ps1"
+      ],
+      "environment_vars": [
+        "SOURCE_BUCKET={{user `source_bucket`}}",
+        "CB_BUILD_NO={{user `cb_buld_no`}}",
+        "BUCKET_REGION={{user `bucket_region`}}",
+        "CHEF_PATH={{user `chef_path`}}"
       ]
     },
     {
       "type": "chef-client",
       "guest_os_type": "windows",
+      "install_command": "powershell.exe -Command \"(New-Object System.Net.WebClient).DownloadFile('https://packages.chef.io/files/stable/chef/12.17.44/windows/2012/chef-client-12.17.44-1-x64.msi', 'C:\\Windows\\Temp\\chef.msi');Start-Process 'msiexec' -ArgumentList '/qb /i C:\\Windows\\Temp\\chef.msi' -NoNewWindow -Wait\"",
       "config_template": "packer/templates/chef-client-win.tpl",
       "skip_install": false,
       "skip_clean_node": true,
@@ -130,6 +118,10 @@
     "build_id": "",
     "build_sha": "",
     "chef_run_list":"",
+    "source_bucket":"",
+    "chef_path":"chef",
+    "bucket_region":"ap-southeast-2",
+    "cb_buld_no":"",
     "ami_regions":"",
     "ami_users":"",
     "packer_role":"packer",

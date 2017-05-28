@@ -60,6 +60,7 @@
     {
       "type": "chef-client",
       "execute_command": "cd /etc/chef && sudo chef-client --local-mode --no-color -c /tmp/packer-chef-client/client.rb -j /tmp/packer-chef-client/first-boot.json --log_level error",
+      "install_command": "curl -L https://omnitruck.chef.io/install.sh | sudo bash -s -- -v 12.17.44",
       "prevent_sudo": false,
       "skip_install": false,
       "skip_clean_node": true,
