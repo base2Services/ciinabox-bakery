@@ -40,6 +40,10 @@
   "provisioners": [
     {
       "type": "powershell",
+      "script": "scripts/win2012/install_7zip.ps1"
+    },
+    {
+      "type": "powershell",
       "inline": [
         "New-Item c:/chef/cookbooks -type directory -force",
         "New-Item c:/chef/data_bags -type directory -force",
@@ -49,10 +53,7 @@
     },
     {
       "type": "powershell",
-      "scripts": [
-        "scripts/win2012/install_7zip.ps1",
-        "scripts/win2012/download_cookbooks.ps1"
-      ],
+      "script": "scripts/win2012/download_cookbooks.ps1",
       "environment_vars": [
         "SOURCE_BUCKET={{user `source_bucket`}}",
         "CB_BUILD_NO={{user `cb_buld_no`}}",
