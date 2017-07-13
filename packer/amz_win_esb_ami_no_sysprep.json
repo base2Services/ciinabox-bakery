@@ -40,6 +40,10 @@
   "provisioners": [
     {
       "type": "powershell",
+      "script": "scripts/win2012/install_7zip_msi.ps1"
+    },
+    {
+      "type": "powershell",
       "script": "scripts/win2012/install_7zip.ps1"
     },
     {
