@@ -60,6 +60,11 @@ if [[ ! x${CHEF_PATH} == "x" ]]; then
   log info "using chef_path ${CHEF_PATH}"
 fi
 
+if [[ ! x${SSH_USERNAME} == "x" ]]; then
+  CLI_OPTS="${CLI_OPTS} -var ssh_username=${SSH_USERNAME}"
+  log info "using ssh_username ${SSH_USERNAME}"
+fi
+
 CLI_OPTS="${CLI_OPTS} -var ami_name=${AMI_TYPE}"
 CLI_OPTS="${CLI_OPTS} -var build_no=${BUILD_NUMBER}"
 
