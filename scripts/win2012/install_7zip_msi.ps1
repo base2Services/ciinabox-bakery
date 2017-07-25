@@ -1,43 +1,36 @@
 # Silent Install 7-Zip
 # http://www.7-zip.org/download.html
 
-# Path for the workdir
+$version = "1604"
 $workdir = "c:\temp\"
 
 # Check if work directory exists if not create it
-
-If (Test-Path -Path $workdir -PathType Container)
-{ Write-Host "$workdir already exists" -ForegroundColor Red}
-ELSE
-{ New-Item -Path $workdir  -ItemType directory }
+if (Test-Path -Path $workdir -PathType Container) {
+  Write-Host "$workdir already exists"
+} else {
+  New-Item -Path $workdir  -ItemType directory
+}
 
 # Download the installer
-
-$source = "http://www.7-zip.org/a/7z1604-x64.msi"
+$source = "http://www.7-zip.org/a/7z$version-x64.msi"
 $destination = "$workdir\7-Zip.msi"
-
-# Check if Invoke-Webrequest exists otherwise execute WebClient
-
-if (Get-Command 'Invoke-Webrequest')
-{
-     Invoke-WebRequest $source -OutFile $destination
-}
-else
-{
-    $WebClient = New-Object System.Net.WebClient
-    $webclient.DownloadFile($source, $destination)
-}
-
+Write-Host "INFO: Downloading 7-Zip $version msi from $source"
 Invoke-WebRequest $source -OutFile $destination
 
-# Start the installation
+Write-Host "INFO: Installing 7-Zip msi"
+$MSIArguments = @(
+  "/i"
+  "$workdir\7-Zip.msi"
+  "/qb"
+)
+Start-Process "msiexec.exe" -ArgumentList $MSIArguments -Wait -NoNewWindow
 
-msiexec.exe /i "$workdir\7-Zip.msi" /qb
-
-# Wait XX Seconds for the installation to finish
-
-Start-Sleep -s 35
-
-# Remove the installer
-
+Write-Host "INFO: Install complete. Cleaning up"
 rm -Force $workdir\7*
+
+# Add 7zip to path
+Write-Output "INFO: Adding command 7z to the path"
+[Environment]::SetEnvironmentVariable("PATH","$env:path;$env:programfiles\7-Zip","MACHINE")
+$env:path = "$env:path;$env:programfiles\7-Zip"
+
+Write-Output "INFO: 7zip msi install complete"
