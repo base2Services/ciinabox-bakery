@@ -32,6 +32,7 @@
     "tags": {
       "Name": "{{ user `ami_name` }}",
       "BuildId": "{{ user `build_id`}}",
+      "AppBuildNumber": "{{ user `build_no` }}",
       "Status": "Baked"
     }
   }],
