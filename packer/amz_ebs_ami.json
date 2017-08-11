@@ -24,14 +24,16 @@
       "Status": "Baked"
     },
     "ami_block_device_mappings": [ {
-      "device_name": "/dev/xvda",
+      "device_name": "{{ user `device_name` }}",
       "volume_size": "{{ user `bake_volume_size` }}",
-      "delete_on_termination": true
+      "delete_on_termination": true,
+      "volume_type": "gp2"
     } ],
     "launch_block_device_mappings": [ {
-      "device_name": "/dev/xvda",
+      "device_name": "{{ user `device_name` }}",
       "volume_size": "{{ user `bake_volume_size` }}",
-      "delete_on_termination": true
+      "delete_on_termination": true,
+      "volume_type": "gp2"
     } ]
   }],
   "provisioners": [
@@ -107,6 +109,7 @@
     "packer_instance_profile":"packer",
     "instance_type":"m3.medium",
     "bake_volume_size":"8",
+    "device_name":"/dev/xvda",
     "ssh_username":"ec2-user"
   }
 }
