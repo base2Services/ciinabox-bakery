@@ -19,6 +19,7 @@
     },
     "user_data_file": "scripts/win/setup_winrm.userdata",
     "winrm_username": "Administrator",
+    "windows_password_timeout": "20m",
     "ami_block_device_mappings": [{
       "device_name": "/dev/sda1",
       "volume_size": "{{ user `bake_volume_size` }}",

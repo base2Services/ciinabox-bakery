@@ -65,6 +65,11 @@ if [[ ! x${SSH_USERNAME} == "x" ]]; then
   log info "using ssh_username ${SSH_USERNAME}"
 fi
 
+if [[ ! x${DEVICE_NAME} == "x" ]]; then
+  CLI_OPTS="${CLI_OPTS} -var device_name=${DEVICE_NAME}"
+  log info "using device_name ${DEVICE_NAME}"
+fi
+
 CLI_OPTS="${CLI_OPTS} -var ami_name=${AMI_TYPE}"
 CLI_OPTS="${CLI_OPTS} -var build_no=${BUILD_NUMBER}"
 
