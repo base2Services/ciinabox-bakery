@@ -13,6 +13,7 @@
     "vpc_id":	"{{ user `vpc_id` }}",
     "subnet_id": "{{ user `subnet_id` }}",
     "ssh_username": "ec2-user",
+    "ssh_timeout":"{{ user `ssh_timeout`}}",
     "ssh_pty": true,
     "security_group_id": "{{ user `security_group` }}",
     "ami_block_device_mappings": [
@@ -126,6 +127,7 @@
     "packer_instance_profile":"packer",
     "instance_type":"m3.medium",
     "bake_volume_size":"8",
-    "docker_volume_size":"8"
+    "docker_volume_size":"8",
+    "ssh_timeout":"5m"
   }
 }
