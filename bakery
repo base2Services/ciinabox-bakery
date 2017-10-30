@@ -83,6 +83,11 @@ if [[ ! x${SOURCE_AMI} == "x" ]]; then
   log info "using custom base ami ${SOURCE_AMI}"
 fi
 
+if [[ ! x${PACKER_SSH_TIMEOUT} == "x" ]]; then
+  CLI_OPTS="${CLI_OPTS} -var ssh_timeout=${PACKER_SSH_TIMEOUT}"
+  log info "using ssh timeout of ${PACKER_SSH_TIMEOUT} seconds"
+fi
+
 if [[ ! x${7} == "x" ]]; then
   CLI_OPTS="${CLI_OPTS} -var build_id=${7}"
   log info "using build_id ${7}"
