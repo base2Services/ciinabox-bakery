@@ -127,7 +127,8 @@ echo "{\"${CLIENT}\":{\"version\":\"${BUILD_NUMBER}\",\"build_id\":\"${7}\",\"bu
 /opt/packer/packer build -machine-readable -var-file=${PACKER_BUILD_PARAMS} ${CLI_OPTS} ${PACKER_BUILD_TMPL} ${DEBUG_FLAG} | tee build/build.log
 
 #extract base AMI-ID
-AMI_ID=`cat build/build.log | tr -d '\000' | grep 'artifact,0,id' | cut -d, -f6 | cut -d: -f2 | grep -o "ami-[0-9abcdef]\{8,18\}"`
+CURRENT_REGION=`curl -s http://169.254.169.254/latest/dynamic/instance-identity/document|grep region|awk -F\" '{print $4}'`
+AMI_ID=`cat build/build.log | tr -d '\000' | grep 'artifact,0,id' | cut -d, -f6 | grep -o "${CURRENT_REGION}:ami-[0-9abcdef]\{8,18\}" | cut -d':' -f2`
 if [[ x${AMI_ID} == 'x' ]]; then
   log error "failed to create ${AMI_TYPE} AMI"
   exit 1
