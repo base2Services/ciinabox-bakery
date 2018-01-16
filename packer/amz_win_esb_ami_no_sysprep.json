@@ -6,7 +6,7 @@
     "source_ami": "{{ user `source_ami` }}",
     "instance_type": "{{ user `instance_type` }}",
     "iam_instance_profile":"{{ user `packer_instance_profile`}}",
-    "ami_name": "{{ user `client`}}-{{ user `ami_name` }}-{{ user `build_no` }}",
+    "ami_name": "{{ user `client`}}-{{ user `ami_name` }}-{{ user `build_id` }}",
     "ami_regions": "{{ user `ami_regions`}}",
     "ami_users": "{{ user `ami_users`}}",
     "access_key": "{{ user `access_key` }}",
@@ -40,6 +40,10 @@
   "provisioners": [
     {
       "type": "powershell",
+      "script": "scripts/win2012/install_7zip_msi.ps1"
+    },
+    {
+      "type": "powershell",
       "inline": [
         "New-Item c:/chef/cookbooks -type directory -force",
         "New-Item c:/chef/data_bags -type directory -force",
@@ -48,29 +52,13 @@
       ]
     },
     {
-      "type": "file",
-      "source": "{{pwd}}/cookbooks",
-      "destination": "c:\\chef\\cookbooks"
-    },
-    {
-      "type": "file",
-      "source": "{{pwd}}/data_bags",
-      "destination": "c:\\chef\\data_bags"
-    },
-    {
-      "type": "file",
-      "source": "{{pwd}}/environments",
-      "destination": "c:\\chef\\environments"
-    },
-    {
-      "type": "file",
-      "source": "{{pwd}}/encrypted_data_bag_secret",
-      "destination": "c:\\chef\\encrypted_data_bag_secret"
-    },
-    {
-      "type": "windows-shell",
-      "inline": [
-        "dir /s c:\\chef"
+      "type": "powershell",
+      "script": "scripts/win2012/download_cookbooks.ps1",
+      "environment_vars": [
+        "SOURCE_BUCKET={{user `source_bucket`}}",
+        "CB_BUILD_NO={{user `cb_buld_no`}}",
+        "BUCKET_REGION={{user `bucket_region`}}",
+        "CHEF_PATH={{user `chef_path`}}"
       ]
     },
     {
@@ -130,6 +118,10 @@
     "build_id": "",
     "build_sha": "",
     "chef_run_list":"",
+    "source_bucket":"",
+    "chef_path":"chef",
+    "bucket_region":"ap-southeast-2",
+    "cb_buld_no":"",
     "ami_regions":"",
     "ami_users":"",
     "packer_role":"packer",
