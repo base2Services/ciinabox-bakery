@@ -40,7 +40,7 @@
   "provisioners": [
     {
       "type": "powershell",
-      "script": "scripts/win2012/install_7zip_msi.ps1"
+      "script": "scripts/win2016/install_7zip_msi.ps1"
     },
     {
       "type": "powershell",
@@ -53,7 +53,7 @@
     },
     {
       "type": "powershell",
-      "script": "scripts/win2012/download_cookbooks.ps1",
+      "script": "scripts/win2016/download_cookbooks.ps1",
       "environment_vars": [
         "SOURCE_BUCKET={{user `source_bucket`}}",
         "CB_BUILD_NO={{user `cb_buld_no`}}",
