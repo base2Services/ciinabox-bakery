@@ -28,6 +28,7 @@
     }],
     "launch_block_device_mappings": [{
       "device_name": "/dev/sda1",
+      "volume_size": "{{ user `bake_volume_size` }}",
       "volume_type": "gp2",
       "delete_on_termination": true
     }],
@@ -40,6 +41,10 @@
   "provisioners": [
     {
       "type": "powershell",
+      "script": "scripts/win2012/install_7zip_msi.ps1"
+    },
+    {
+      "type": "powershell",
       "inline": [
         "New-Item c:/chef/cookbooks -type directory -force",
         "New-Item c:/chef/data_bags -type directory -force",
@@ -48,29 +53,13 @@
       ]
     },
     {
-      "type": "file",
-      "source": "{{pwd}}/cookbooks",
-      "destination": "c:\\chef\\cookbooks"
-    },
-    {
-      "type": "file",
-      "source": "{{pwd}}/data_bags",
-      "destination": "c:\\chef\\data_bags"
-    },
-    {
-      "type": "file",
-      "source": "{{pwd}}/environments",
-      "destination": "c:\\chef\\environments"
-    },
-    {
-      "type": "file",
-      "source": "{{pwd}}/encrypted_data_bag_secret",
-      "destination": "c:\\chef\\encrypted_data_bag_secret"
-    },
-    {
-      "type": "windows-shell",
-      "inline": [
-        "dir /s c:\\chef"
+      "type": "powershell",
+      "script": "scripts/win2012/download_cookbooks.ps1",
+      "environment_vars": [
+        "SOURCE_BUCKET={{user `source_bucket`}}",
+        "CB_BUILD_NO={{user `cb_buld_no`}}",
+        "BUCKET_REGION={{user `bucket_region`}}",
+        "CHEF_PATH={{user `chef_path`}}"
       ]
     },
     {
@@ -111,6 +100,10 @@
     "build_id": "",
     "build_sha": "",
     "chef_run_list":"",
+    "source_bucket":"",
+    "chef_path":"chef",
+    "bucket_region":"ap-southeast-2",
+    "cb_buld_no":"",
     "ami_regions":"",
     "ami_users":"",
     "packer_role":"packer",
