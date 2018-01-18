@@ -57,10 +57,6 @@
     },
     {
       "type": "powershell",
-      "script": "scripts/win2012/install_7zip.ps1"
-    },
-    {
-      "type": "powershell",
       "script": "scripts/win2016/download_cookbooks.ps1",
       "environment_vars": [
         "SOURCE_BUCKET={{user `source_bucket`}}",
