@@ -122,6 +122,10 @@ if [ ! -z "$COPY_REGIONS" ];then
   CLI_OPTS="${CLI_OPTS} -var ami_regions=${COPY_REGIONS// /,}"
 fi
 
+if [[ ! x${OPT_VARS} == "x" ]]; then
+  CLI_OPTS="${CLI_OPTS} ${OPT_VARS}"
+fi
+
 echo "{\"${CLIENT}\":{\"version\":\"${BUILD_NUMBER}\",\"build_id\":\"${7}\",\"build_sha\":\"${8}\"}}" > build/override.json
 
 /opt/packer/packer build -machine-readable -var-file=${PACKER_BUILD_PARAMS} ${CLI_OPTS} ${PACKER_BUILD_TMPL} ${DEBUG_FLAG} | tee build/build.log
