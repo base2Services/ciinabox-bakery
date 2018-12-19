@@ -45,7 +45,10 @@
       }
     ],
     "run_tags": {
-      "Name": "Packer {{ user `ami_name` }} (Amazon Linux)"
+      "Name": "Packer {{ user `ami_name` }} (Amazon Linux)",
+      "BuildNumber": "{{ user `build_no`}}",
+      "BuildSHA": "{{ user `build_sha`}}",
+      "Status": "Baking"
     },
     "tags": {
       "Name": "{{ user `ami_name` }}",
