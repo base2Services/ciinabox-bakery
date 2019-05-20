@@ -40,8 +40,8 @@ if [[ ! x${CHEF_VERSION} == "x" ]]; then
   log info "using chef_version ${CHEF_VERSION}"
 fi
 
-if [[ "$CHEF_ACCEPT_LICENSE" = false ]]; then
-  log info "not setting the --chef-license flag"
+if [[ "$DISABLE_CHEF_ACCEPT_LICENSE" = true ]]; then
+  log info "disabling the --chef-license flag"
 fi
 
 if [[ ! x${CB_BUILD_NO} == "x" ]]; then
