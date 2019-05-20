@@ -40,7 +40,8 @@ if [[ ! x${CHEF_VERSION} == "x" ]]; then
   log info "using chef_version ${CHEF_VERSION}"
 fi
 
-if [[ "$DISABLE_CHEF_ACCEPT_LICENSE" = true ]]; then
+if [[ "${DISABLE_CHEF_ACCEPT_LICENSE}" = true ]]; then
+  CLI_OPTS="${CLI_OPTS} -var chef_accept_license=''"
   log info "disabling the --chef-license flag"
 fi
 

@@ -104,6 +104,7 @@
     "build_sha": "",
     "chef_run_list":"",
     "chef_version":"latest",
+    "chef_accept_license":"--chef-license accept",
     "ami_regions":"",
     "ami_users":"",
     "packer_role":"packer",
