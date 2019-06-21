@@ -5,6 +5,7 @@ cookbook_path    "C:/chef/cookbooks"
 data_bag_path    "C:/chef/data_bags"
 environment_path "C:/chef/environments"
 chef_server_url  "{{.ServerUrl}}"
+chef_license      "accept"
 client_key       "{{.ClientKey}}"
 {{if ne .EncryptedDataBagSecretPath ""}}
 encrypted_data_bag_secret "{{.EncryptedDataBagSecretPath}}"
