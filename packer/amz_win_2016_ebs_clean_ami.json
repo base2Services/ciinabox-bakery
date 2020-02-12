@@ -66,8 +66,8 @@
       "guest_os_type": "windows",
       "config_template": "packer/templates/chef-client-win.tpl",
       "skip_install": false,
-      "skip_clean_node": true,
-      "skip_clean_client": true,
+      "skip_clean_node": false,
+      "skip_clean_client": false,
       "server_url": "http://localhost:8889",
       "ssl_verify_mode": "verify_none",
       "node_name": "{{user `client`}}-packer-{{user `ami_name`}}-{{uuid}}",
@@ -82,8 +82,8 @@
     {
       "type": "powershell",
       "inline": [
-        "C:/opscode/chef/bin/knife.bat node delete {{user `client`}}-packer-{{user `ami_name`}}-{{uuid}} -s http://localhost:8889 -k C:/Windows/Temp/packer-chef-client/client.pem -u {{user `client`}}-packer-{{user `ami_name`}}-{{uuid}} -y",
-        "C:/opscode/chef/bin/knife.bat client delete {{user `client`}}-packer-{{user `ami_name`}}-{{uuid}} -s http://localhost:8889 -k C:/Windows/Temp/packer-chef-client/client.pem -u {{user `client`}}-packer-{{user `ami_name`}}-{{uuid}} -y"
+        "Get-Package -Name \"Chef*\" | Uninstall-Package -Confirm",
+        "Remove-Item -Recurse -Force C:/chef"
       ]
     },
     {
