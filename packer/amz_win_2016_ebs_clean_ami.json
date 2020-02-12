@@ -65,6 +65,7 @@
       "type": "chef-client",
       "guest_os_type": "windows",
       "config_template": "packer/templates/chef-client-win.tpl",
+      "execute_command": "sudo chef-client --no-color -c {{.ConfigPath}} -j {{.JsonPath}} -k C:/Windows/Temp/packer-chef-client/client.pem",
       "skip_install": false,
       "skip_clean_node": false,
       "skip_clean_client": false,
