@@ -81,9 +81,8 @@
     },
     {
       "type": "powershell",
-      "inline": [
-        "Get-Package -Name \"Chef*\" | Uninstall-Package -Confirm",
-        "Remove-Item -Recurse -Force C:/chef"
+      "scripts": [
+        "scripts/win2016/remove_chef.ps1"
       ]
     },
     {
