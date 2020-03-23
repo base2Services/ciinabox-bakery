@@ -14,6 +14,11 @@ try
   $CookbookVersion = $ENV:CB_BUILD_NO
   $ChefPath        = $ENV:CHEF_PATH
 
+  if([string]::IsNullOrEmpty($SourceBucket) -And [string]::IsNullOrEmpty($CookbookVersion)) {
+    Write-Output "INFO: No Cookbooks to download...this instance must have existing cookbooks"
+    exit 0
+  }
+
   try {
     Write-Output "INFO: Downloading chef bundle from s3 location: $SourceBucket/$ChefPath/$CookbookVersion/chef-bundle.tar.gz"
     Read-S3Object -Region $BucketRegion -BucketName $SourceBucket -Key /$ChefPath/$CookbookVersion/chef-bundle.tar.gz -File $GzipPath
