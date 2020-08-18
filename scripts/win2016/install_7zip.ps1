@@ -7,7 +7,7 @@ try
   $start_time = Get-Date
 
   # Set download URLs
-  $7zip_download_url = "http://downloads.sourceforge.net/sevenzip/7za465.zip"
+  $7zip_download_url = "https://downloads.sourceforge.net/sevenzip/7za465.zip"
 
   # Create Software folder
   $software_folder = "$env:SystemDrive\software"
