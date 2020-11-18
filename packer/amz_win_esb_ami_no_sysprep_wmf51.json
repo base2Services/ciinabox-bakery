@@ -59,9 +59,12 @@
     {
       "type": "powershell",
       "inline": [
-        "Copy-S3Object -BucketName packages.tools.aws.attachecloud.com -Key /windows/Win7AndW2K8R2-KB3191566-x64.msu -DestinationKey /temp/Win7AndW2K8R2-KB3191566-x64.msu",
-        "/temp/Win7AndW2K8R2-KB3191566-x64.msu /quiet /norestart"
+        "Copy-S3Object -BucketName packages.tools.aws.attachecloud.com -Key windows/Win8.1AndW2K12R2-KB3191564-x64.msu -LocalFile c:/temp/Win8.1AndW2K12R2-KB3191564-x64.msu -Region ap-southeast-2"
       ]
+    },
+    {
+      "type": "windows-shell",
+      "inline": ["/temp/Win8.1AndW2K12R2-KB3191564-x64.msu /quiet /norestart"]
     },
     {
       "type": "windows-restart"
@@ -93,6 +96,9 @@
           "app_build_sha": "{{user `build_sha`}}"
         }
       }
+    },
+    {
+      "type": "windows-restart"
     },
     {
       "type": "powershell",
