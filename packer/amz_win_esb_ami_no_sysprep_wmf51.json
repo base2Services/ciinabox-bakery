@@ -64,7 +64,11 @@
     },
     {
       "type": "windows-shell",
-      "inline": ["/temp/Win8.1AndW2K12R2-KB3191564-x64.msu /quiet /norestart"]
+      "inline": [
+        "set ComputerName = echo hostname",
+        "winrs.exe -r:%ComputerName% wusa.exe C:/temp/Win8.1AndW2K12R2-KB3191564-x64.msu /extract:C:/temp/",
+        "winrs.exe -r:%ComputerName% dism.exe /online /add-package /PackagePath:C:/temp/WindowsBlue-KB3191564-x64.cab /NoRestart"
+      ]
     },
     {
       "type": "windows-restart"
