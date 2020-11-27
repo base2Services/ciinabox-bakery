@@ -144,7 +144,7 @@ if [[ x${AMI_ID} == 'x' ]]; then
 fi
 
 log info "Creating AMI Yaml Mapping file....."
-cat <<EOT > ${AMI_TYPE}-ami-${BUILD_NUMBER}.yml
+cat <<EOT > ${AMI_TYPE}-ami-${7}.yml
 ${AMI_TYPE}AMI:
   ${REGION}:
     ami: ${AMI_ID}
