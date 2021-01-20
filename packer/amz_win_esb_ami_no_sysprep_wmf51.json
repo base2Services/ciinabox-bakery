@@ -71,6 +71,12 @@
       ]
     },
     {
+      "type": "windows-shell",
+      "inline": [
+        "echo WMF done! This is just for debugging :)"
+      ]
+    },
+    {
       "type": "windows-restart"
     },
     {
