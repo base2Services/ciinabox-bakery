@@ -103,7 +103,7 @@
     "build_id": "",
     "build_sha": "",
     "chef_run_list":"",
-    "chef_version":"latest",
+    "chef_version":"16.10.17",
     "chef_accept_license":"--chef-license accept",
     "ami_regions":"",
     "ami_users":"",
