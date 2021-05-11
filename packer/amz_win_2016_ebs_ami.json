@@ -64,6 +64,7 @@
     {
       "type": "chef-client",
       "guest_os_type": "windows",
+      "install_command":"powershell.exe -Command \". { iwr -useb https://omnitruck.chef.io/install.ps1 } | iex; install -v {{user `chef_version`}}\"",
       "config_template": "packer/templates/chef-client-win.tpl",
       "skip_install": false,
       "skip_clean_node": true,
@@ -108,6 +109,7 @@
     "packer_role":"packer",
     "packer_instance_profile":"packer",
     "instance_type":"m3.medium",
-    "bake_volume_size":"30"
+    "bake_volume_size":"30",
+    "chef_version":"latest"
   }
 }
