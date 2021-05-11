@@ -64,7 +64,7 @@
     {
       "type": "chef-client",
       "guest_os_type": "windows",
-      "install_command": "powershell.exe -Command \"(New-Object System.Net.WebClient).DownloadFile('https://packages.chef.io/files/stable/chef/14.13.11/windows/2012/chef-client-14.13.11-1-x64.msi', 'C:\\Windows\\Temp\\chef.msi');Start-Process 'msiexec' -ArgumentList '/qb /i C:\\Windows\\Temp\\chef.msi' -NoNewWindow -Wait\"",
+      "install_command": "powershell.exe -ExecutionPolicy Bypass -c \"[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12; . { iwr -useb https://omnitruck.cinc.sh/install.ps1 } | iex; install -version 15\"",
       "config_template": "packer/templates/chef-client-win.tpl",
       "skip_install": false,
       "skip_clean_node": true,
@@ -109,6 +109,7 @@
     "packer_role":"packer",
     "packer_instance_profile":"packer",
     "instance_type":"m3.medium",
-    "bake_volume_size":"30"
+    "bake_volume_size":"30",
+    "chef_version":"latest"
   }
 }
