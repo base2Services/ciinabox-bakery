@@ -11,13 +11,12 @@
     "ami_users": "{{ user `ami_users`}}",
     "access_key": "{{ user `access_key` }}",
     "secret_key": "{{ user `secret_key` }}",
-    "vpc_id":	"{{ user `vpc_id` }}",
+    "vpc_id": "{{ user `vpc_id` }}",
     "subnet_id": "{{ user `subnet_id` }}",
     "security_group_id": "{{ user `security_group` }}",
     "run_tags": {
       "Name": "Packer {{ user `ami_name` }} (Windows)"
     },
-    "user_data_file": "scripts/win/setup_winrm.userdata",
     "winrm_username": "Administrator",
     "ami_block_device_mappings": [{
       "device_name": "/dev/sda1",
@@ -27,7 +26,6 @@
     }],
     "launch_block_device_mappings": [{
       "device_name": "/dev/sda1",
-      "volume_size": "{{ user `bake_volume_size` }}",
       "volume_type": "gp2",
       "delete_on_termination": true
     }],
@@ -41,14 +39,6 @@
   "provisioners": [
     {
       "type": "powershell",
-      "script": "scripts/win2012/install_7zip_msi.ps1"
-    },
-    {
-      "type": "powershell",
-      "script": "scripts/win2012/install_7zip.ps1"
-    },
-    {
-      "type": "powershell",
       "inline": [
         "New-Item c:/chef/cookbooks -type directory -force",
         "New-Item c:/chef/data_bags -type directory -force",
@@ -58,7 +48,10 @@
     },
     {
       "type": "powershell",
-      "script": "scripts/win2012/download_cookbooks.ps1",
+      "scripts": [
+        "scripts/win2016/download_cookbooks.ps1",
+        "scripts/win2016/amazon_setup.ps1"
+      ],
       "environment_vars": [
         "SOURCE_BUCKET={{user `source_bucket`}}",
         "CB_BUILD_NO={{user `cb_buld_no`}}",
@@ -69,11 +62,10 @@
     {
       "type": "chef-client",
       "guest_os_type": "windows",
-      "install_command": "powershell.exe -Command \"(New-Object System.Net.WebClient).DownloadFile('https://packages.chef.io/files/stable/chef/12.20.3/windows/2012/chef-client-12.20.3-1-x64.msi', 'C:\\Windows\\Temp\\chef.msi');Start-Process 'msiexec' -ArgumentList '/qb /i C:\\Windows\\Temp\\chef.msi' -NoNewWindow -Wait\"",
       "config_template": "packer/templates/chef-client-win.tpl",
-      "skip_install": false,
+      "skip_install": true,
       "skip_clean_node": true,
-      "skip_clean_client": true,
+      "skip_clean_client": false,
       "server_url": "http://localhost:8889",
       "ssl_verify_mode": "verify_none",
       "node_name": "{{user `client`}}-packer-{{user `ami_name`}}-{{uuid}}",
@@ -88,26 +80,7 @@
     {
       "type": "powershell",
       "inline": [
-        "$EC2SettingsFile=\"C:\\Program Files\\Amazon\\Ec2ConfigService\\Settings\\Config.xml\"",
-        "$xml = [xml](get-content $EC2SettingsFile)",
-        "$xmlElement = $xml.get_DocumentElement()",
-        "$xmlElementToModify = $xmlElement.Plugins",
-        "foreach ($element in $xmlElementToModify.Plugin)",
-        "{",
-        "    if ($element.name -eq \"Ec2SetPassword\")",
-        "    {",
-        "        $element.State=\"Enabled\"",
-        "    }",
-        "    elseif ($element.name -eq \"Ec2HandleUserData\")",
-        "    {",
-        "        $element.State=\"Enabled\"",
-        "    }",
-        "    elseif ($element.name -eq \"Ec2DynamicBootVolumeSize\")",
-        "    {",
-        "        $element.State=\"Enabled\"",
-        "    }",
-        "}",
-        "$xml.Save($EC2SettingsFile)"
+        "C:/ProgramData/Amazon/EC2-Windows/Launch/Scripts/InitializeInstance.ps1 -Schedule"
       ]
     }
   ],
@@ -117,8 +90,8 @@
     "source_ami": "",
     "ami_name":"",
     "vpc_id": "",
-    "subnet_id": "" ,
-    "security_group": "" ,
+    "subnet_id": "",
+    "security_group": "",
     "region": "",
     "build_no": "",
     "build_id": "",
