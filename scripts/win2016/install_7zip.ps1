@@ -19,6 +19,9 @@ try
   mkdir -force $temp_folder
   cd $temp_folder
 
+  # Set security to TLS 1.2
+  [System.Net.ServicePointManager]::SecurityProtocol = 'TLS12'
+  
   # Download 7zip
   Write-Output "Downloading 7zip from $7zip_download_url"
   $wc = new-object System.Net.WebClient
