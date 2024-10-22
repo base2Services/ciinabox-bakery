@@ -13,6 +13,7 @@
     "secret_key": "{{ user `secret_key` }}",
     "vpc_id": "{{ user `vpc_id` }}",
     "subnet_id": "{{ user `subnet_id` }}",
+    "timeout": "90m",
     "security_group_id": "{{ user `security_group` }}",
     "run_tags": {
       "Name": "Packer {{ user `ami_name` }} (Windows)"
