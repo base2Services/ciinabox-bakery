@@ -64,7 +64,7 @@
     {
       "type": "chef-client",
       "guest_os_type": "windows",
-      "install_command": "powershell.exe -ExecutionPolicy Bypass -c \"[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12; . { iwr -useb https://omnitruck.cinc.sh/install.ps1 } | iex; install -version 15\"",
+      "install_command":"powershell.exe -Command \". { iwr -useb https://omnitruck.chef.io/install.ps1 } | iex; install -v 15\"",
       "config_template": "packer/templates/chef-client-win.tpl",
       "skip_install": false,
       "skip_clean_node": true,
