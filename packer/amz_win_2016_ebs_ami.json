@@ -64,7 +64,8 @@
     {
       "type": "chef-client",
       "guest_os_type": "windows",
-      "install_command":"powershell.exe -Command \". { iwr -useb https://omnitruck.chef.io/install.ps1 } | iex; install -v 15\"",
+      "install_command": "powershell.exe -ExecutionPolicy Bypass -c \"[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12; . { iwr -useb https://omnitruck.cinc.sh/install.ps1 } | iex; install -version 15\"",
+      "execute_command": "C:/cinc-project/cinc/bin/chef-solo.bat --no-color -c C:/Windows/Temp/packer-chef-client/client.rb -j C:/Windows/Temp/packer-chef-client/first-boot.json",
       "config_template": "packer/templates/chef-client-win.tpl",
       "skip_install": false,
       "skip_clean_node": true,
