@@ -77,6 +77,7 @@ fi
 
 CLI_OPTS="${CLI_OPTS} -var ami_name=${AMI_TYPE}"
 CLI_OPTS="${CLI_OPTS} -var build_no=${BUILD_NUMBER}"
+log info "using build_no name ${BUILD_NUMBER}"
 
 if [[ ! x${CLIENT} == "x" ]]; then
   CLI_OPTS="${CLI_OPTS} -var client=${CLIENT}"
