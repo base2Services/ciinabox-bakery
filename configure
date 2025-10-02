@@ -37,7 +37,7 @@ fi
 echo "test"
 cat <<EOT > ${SCRIPT_PATH}/base_params.json
 {
-  "region": "${Region}",
+  "region": "${REGION}",
   "vpc_id": "${VPC_ID}",
   "subnet_id": "${SUBNET_ID}",
   "security_group": "${SecurityGroup}",
