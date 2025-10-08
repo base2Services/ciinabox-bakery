@@ -33,8 +33,8 @@ try
   }
 
   Write-Output "INFO: Extracting $GzipPath to $CookbookDir"
-  7za x $GzipPath -o"$Base2Path" -y
-  7za x $TarPath -o"$Destination" -y
+  & "C:\Program Files\7-Zip\7z.exe" x $GzipPath -o"$Base2Path" -y
+  & "C:\Program Files\7-Zip\7z.exe" x $TarPath -o"$Destination" -y
 
   Write-Output "INFO: Cleaning up $GzipPath $TarPath"
   rm $GzipPath
