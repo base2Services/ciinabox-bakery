@@ -64,7 +64,7 @@
     {
       "type": "chef-client",
       "guest_os_type": "windows",
-      "install_command":"powershell.exe -Command \". { iwr -SkipCertificateCheck -useb https://omnitruck.chef.io/install.ps1 } | iex; install -v {{user `chef_version`}}\"",
+      "install_command":"powershell.exe -Command \"[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12; . { iwr -SkipCertificateCheck -useb https://omnitruck.chef.io/install.ps1 } | iex; install -v {{user `chef_version`}}\"",
       "config_template": "packer/templates/chef-client-win.tpl",
       "skip_install": false,
       "skip_clean_node": true,
