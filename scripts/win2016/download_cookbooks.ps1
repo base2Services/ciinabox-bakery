@@ -49,4 +49,5 @@ catch
   Write-Output "ERROR: Exception Message: $($_.Exception.Message)"
   exit 1
 }
+[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
 exit 0
