@@ -110,6 +110,6 @@
     "packer_instance_profile":"packer",
     "instance_type":"m3.medium",
     "bake_volume_size":"30",
-    "chef_version":"latest"
+    "chef_version":"14.15.6"
   }
 }
