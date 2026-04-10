@@ -45,14 +45,15 @@
         "New-Item c:/chef/cookbooks -type directory -force",
         "New-Item c:/chef/data_bags -type directory -force",
         "New-Item c:/chef/environments -type directory -force",
-        "New-Item c:/chef/encrypted_data_bag_secret -type directory -force"
+        "New-Item c:/chef/encrypted_data_bag_secret -type directory -force",
+        "[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12"
       ]
     },
     {
       "type": "powershell",
       "scripts": [
         "scripts/win2016/install_7zip.ps1",
-        "[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12; scripts/win2016/download_cookbooks.ps1",
+        "scripts/win2016/download_cookbooks.ps1",
         "scripts/win2016/amazon_setup.ps1"
       ],
       "environment_vars": [
