@@ -19,13 +19,17 @@ try
     exit 0
   }
 
-  try {
-    Write-Output "INFO: Downloading chef bundle from s3 location: $SourceBucket/$ChefPath/$CookbookVersion/chef-bundle.tar.gz"
-    Read-S3Object -Region $BucketRegion -BucketName $SourceBucket -Key /$ChefPath/$CookbookVersion/chef-bundle.tar.gz -File $GzipPath
-  } catch {
-    Write-Output "INFO: Bundle not found, downloading cookbooks from s3 location: $SourceBucket/$ChefPath/$CookbookVersion/cookbooks.tar.gz"
-    Read-S3Object -Region $BucketRegion -BucketName $SourceBucket -Key /$ChefPath/$CookbookVersion/cookbooks.tar.gz -File $GzipPath
-  }
+  # Old process for downloading chef artefacts
+  #try {
+  #  Write-Output "INFO: Downloading chef bundle from s3 location: $SourceBucket/$ChefPath/$CookbookVersion/chef-bundle.tar.gz"
+  #  Read-S3Object -Region $BucketRegion -BucketName $SourceBucket -Key /$ChefPath/$CookbookVersion/chef-bundle.tar.gz -File $GzipPath
+  #} catch {
+  #  Write-Output "INFO: Bundle not found, downloading cookbooks from s3 location: $SourceBucket/$ChefPath/$CookbookVersion/cookbooks.tar.gz"
+  #  Read-S3Object -Region $BucketRegion -BucketName $SourceBucket -Key /$ChefPath/$CookbookVersion/cookbooks.tar.gz -File $GzipPath
+  #}
+
+  Write-Output "INFO: Downloading cookbooks from s3 location: $SourceBucket/$ChefPath/$CookbookVersion/cookbooks.tar.gz"
+  Read-S3Object -Region $BucketRegion -BucketName $SourceBucket -Key /$ChefPath/$CookbookVersion/cookbooks.tar.gz -File $GzipPath
 
   Write-Output "INFO: Deleting dir $CookbookDir"
   if(Test-Path -Path $CookbookDir ){
