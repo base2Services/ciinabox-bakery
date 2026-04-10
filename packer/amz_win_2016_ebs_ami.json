@@ -52,7 +52,7 @@
       "type": "powershell",
       "scripts": [
         "scripts/win2016/install_7zip.ps1",
-        "scripts/win2016/download_cookbooks.ps1",
+        "[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12; scripts/win2016/download_cookbooks.ps1",
         "scripts/win2016/amazon_setup.ps1"
       ],
       "environment_vars": [
