@@ -1,5 +1,6 @@
 $ErrorActionPreference = "Stop"
 Set-ExecutionPolicy Bypass -force
+[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
 Write-Output "Start at: $(Get-Date)"
 try
 {

@@ -45,8 +45,7 @@
         "New-Item c:/chef/cookbooks -type directory -force",
         "New-Item c:/chef/data_bags -type directory -force",
         "New-Item c:/chef/environments -type directory -force",
-        "New-Item c:/chef/encrypted_data_bag_secret -type directory -force",
-        "[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12"
+        "New-Item c:/chef/encrypted_data_bag_secret -type directory -force"
       ]
     },
     {
